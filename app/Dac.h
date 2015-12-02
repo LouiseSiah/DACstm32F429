@@ -23,4 +23,7 @@ struct DAC_t{
 
 #define Dac_reg ((DACtype*)0x40007400)
 
+void dacChannelxEnable(int channelX);
+void dacOutputBufferxEnable(int channelX);
+
 #endif // __Dac_H__

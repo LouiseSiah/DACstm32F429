@@ -133,14 +133,15 @@
       <source file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h" lastModified="14c0ebfff30">
          <include file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h"/>
       </source>
-      <source file="..\..\..\app\Dac.h" lastModified="15160b9d380">
+      <source file="..\..\..\app\Dac.h" lastModified="15161ce2f98">
       </source>
       <source file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h" lastModified="14c0ebff760">
          <include file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h"/>
       </source>
       <source file="..\..\..\app\Core\core_cmFunc.h" lastModified="14c0ebd8a48">
       </source>
-      <source file="..\..\..\app\Dac.c" lastModified="15160b10b28">
+      <source file="..\..\..\app\Dac.c" lastModified="151619c83ab">
+         <include file="..\..\..\app\Dac.h"/>
       </source>
       <source file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_sdmmc.h" lastModified="14c0ebfff30">
          <include file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h"/>
@@ -158,15 +159,13 @@
       <source file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h" lastModified="14c0ebfff30">
          <include file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h"/>
       </source>
-      <source file="..\..\..\app\Gpio.h" lastModified="150dbbe1b9a">
-      </source>
       <source file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_ltdc.h" lastModified="14c0ebfff30">
          <include file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h"/>
       </source>
       <source file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cec.h" lastModified="14c0ebfff30">
          <include file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h"/>
       </source>
-      <source file="..\..\..\app\Gpio.c" lastModified="150dbb9b96f">
+      <source file="..\..\..\app\Gpio.c" lastModified="15161b02d4e">
          <include file="..\..\..\app\Gpio.h"/>
          <include file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h"/>
       </source>
@@ -291,6 +290,9 @@
       </source>
       <source file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hash_ex.h" lastModified="14c0ebfff30">
          <include file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h"/>
+      </source>
+      <source file="..\..\..\app\Rcc.c" lastModified="15160d1188c">
+         <include file="..\..\..\app\Rcc.h"/>
       </source>
       <source file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_crc.h" lastModified="14c0ebfff30">
          <include file="..\..\..\..\STM32Cube_FW_F4_V1.5.0\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h"/>

@@ -96,17 +96,17 @@ Discarded input sections
  .debug_frame   0x00000000       0xa8 ..\obj\Rcc.o
  .ARM.attributes
                 0x00000000       0x33 ..\obj\Rcc.o
- .text          0x00000000      0x15c ..\obj\Gpio.o
+ .text          0x00000000      0x114 ..\obj\Gpio.o
  .data          0x00000000        0x0 ..\obj\Gpio.o
  .bss           0x00000000        0x0 ..\obj\Gpio.o
- .debug_info    0x00000000      0x2bd ..\obj\Gpio.o
- .debug_abbrev  0x00000000       0xed ..\obj\Gpio.o
+ .debug_info    0x00000000      0x253 ..\obj\Gpio.o
+ .debug_abbrev  0x00000000       0xde ..\obj\Gpio.o
  .debug_aranges
                 0x00000000       0x20 ..\obj\Gpio.o
- .debug_line    0x00000000      0x177 ..\obj\Gpio.o
- .debug_str     0x00000000      0x280 ..\obj\Gpio.o
+ .debug_line    0x00000000      0x176 ..\obj\Gpio.o
+ .debug_str     0x00000000      0x23e ..\obj\Gpio.o
  .comment       0x00000000       0x71 ..\obj\Gpio.o
- .debug_frame   0x00000000       0xcc ..\obj\Gpio.o
+ .debug_frame   0x00000000       0xa8 ..\obj\Gpio.o
  .ARM.attributes
                 0x00000000       0x33 ..\obj\Gpio.o
  .text          0x00000000      0x544 ..\obj\stm32f4xx_hal_cortex.o
@@ -142,12 +142,17 @@ Discarded input sections
  .debug_frame   0x00000000      0x204 ..\obj\stm32f4xx_hal_rcc.o
  .ARM.attributes
                 0x00000000       0x33 ..\obj\stm32f4xx_hal_rcc.o
- .text          0x00000000        0x0 ..\obj\Dac.o
+ .text          0x00000000       0x40 ..\obj\Dac.o
  .data          0x00000000        0x0 ..\obj\Dac.o
  .bss           0x00000000        0x0 ..\obj\Dac.o
- .debug_line    0x00000000        0x0 ..\obj\Dac.o
- .debug_str     0x00000000       0x99 ..\obj\Dac.o
+ .debug_info    0x00000000      0x163 ..\obj\Dac.o
+ .debug_abbrev  0x00000000       0x81 ..\obj\Dac.o
+ .debug_aranges
+                0x00000000       0x20 ..\obj\Dac.o
+ .debug_line    0x00000000      0x126 ..\obj\Dac.o
+ .debug_str     0x00000000      0x1ee ..\obj\Dac.o
  .comment       0x00000000       0x71 ..\obj\Dac.o
+ .debug_frame   0x00000000       0x38 ..\obj\Dac.o
  .ARM.attributes
                 0x00000000       0x33 ..\obj\Dac.o
  .text          0x00000000        0x0 c:/program files/gnu tools arm embedded/4.9 2015q1/bin/../lib/gcc/arm-none-eabi/4.9.3/armv7e-m/crtend.o

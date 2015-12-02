@@ -1,0 +1,5 @@
+SETTLING TIME is the time for the output to settle to within 1/2 LSB of the final value after the input code is
+updated.
+
+WAKE-UP TIME is the time for the output to exit power-down mode. This is the time from the rising edge of
+SYNC to when the output voltage deviates from the power-down voltage of 0V.

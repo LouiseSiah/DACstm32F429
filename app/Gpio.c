@@ -4,7 +4,6 @@
 /**
  * brief @ This function is to configure I/O pins as analogue mode.
  *
- *
  * param 1 @ pinNum - is the pin number of the port
  * param 2 @ port   - is the port to configure
  */
@@ -17,23 +16,21 @@ void configureAnalog(int pinNum, GPIO *port){
 
 
 /**
- * configureOutput:
- *
- * This function configure the pin to become an output pin.
- *
- * @direction	is the output mode
- * @pinNum		is the pin number of the port
- * @port		is the port to configure
+ * brief @ This function is to configure the pin as Output pin.
+*
+ * param 1 @ speed  - is the output mode
+ * param 2 @ pinNum	-	is the pin number of the port
+ * param 3 @ port	- is the port to configure
  */
 void configureOutput(int speed, int pinNum, GPIO *port){
 
 	gpioUnresetEnableClock(port);
 
-	port->MODER &= ~(3 << (pinNum*2));		//MASK MODER reg and CLEAR selected bits
-	port->MODER |= GPIO_MODE_OUTPUT << (pinNum*2);
+	port->MODER &= ~(3 << (pinNum * 2));		//MASK MODER reg and CLEAR selected bits
+	port->MODER |= GPIO_MODE_OUTPUT << (pinNum * 2);
 	port->OTYPER &= ~(1 << (pinNum));
-	port->OSPEED &= ~(3 << (pinNum*2));
-	port->OSPEED |= speed << (pinNum*2);
+	port->OSPEED &= ~(3 << (pinNum * 2));
+	port->OSPEED |= speed << (pinNum * 2);
 }
 
 

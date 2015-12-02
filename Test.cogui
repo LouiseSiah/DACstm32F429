@@ -18,11 +18,13 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
+<part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Dac.c" partName="Dac.c" path="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Dac.c" title="Dac.c" tooltip="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Dac.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="Dac.c" partName="Dac.c" path="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Dac.c" title="Dac.c" tooltip="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Dac.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test/app/Dac.c"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
@@ -30,9 +32,17 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test/app/Dac.h"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="559" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/D203C-01/CoIDE/workspace/DAC/app/main.c" title="main.c" tooltip="C:/Users/D203C-01/CoIDE/workspace/DAC/app/main.c" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/D203C-01/CoIDE/workspace/DAC/app/main.c" title="main.c" tooltip="C:/Users/D203C-01/CoIDE/workspace/DAC/app/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test/app/main.c"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="37" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Rcc.c" partName="Rcc.c" path="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Rcc.c" title="Rcc.c" tooltip="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Rcc.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test/app/Rcc.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="395" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="Rcc.h" partName="Rcc.h" path="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Rcc.h" title="Rcc.h" tooltip="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Rcc.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test/app/Rcc.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="416" selectionTopPixel="780"/>
 </editor>
 </editors>
 <views>
@@ -43,7 +53,7 @@
 <element path="/Test/app"/>
 </expanded>
 <selection>
-<element path="/Test/app/main.c"/>
+<element path="/Test/app/Dac.c"/>
 </selection>
 </viewState>
 </view>
@@ -79,8 +89,8 @@
 <hide_menu_item_id id="org.coocox.codebugger.configuration.showMemoryBrowserAction"/>
 <hide_menu_item_id id="org.coocox.codebugger.configuration.showVariablesAction"/>
 <hide_menu_item_id id="org.coocox.builder.ui.openProjectExplorerAction"/>
-<hide_menu_item_id id="org.coocox.codebugger.trace.actions.ShowTraceControlAction"/>
 <hide_menu_item_id id="org.eclipse.debug.ui.commands.TerminateAndRelaunch"/>
+<hide_menu_item_id id="org.coocox.codebugger.trace.actions.ShowTraceControlAction"/>
 <hide_menu_item_id id="org.coocox.codebugger.configuration.showRegistersAction"/>
 <hide_toolbar_item_id id="org.eclipse.cdt.debug.internal.ui.actions.ToggleInstructionStepModeAction"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
@@ -139,6 +149,9 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/Dac.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/RNG.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/Rcc.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/Rcc.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/Dac.c"/>
 </editors>
 <item historyLabel="RNG.h" index="0">
 <position/>
@@ -161,8 +174,23 @@
 <item historyLabel="Dac.h" index="2">
 <position info="not_deleted" x="559" y="0"/>
 </item>
-<item active="true" historyLabel="main.c" index="4">
+<item historyLabel="main.c" index="4">
 <position info="not_deleted" x="37" y="0"/>
+</item>
+<item historyLabel="Rcc.c" index="5">
+<position info="not_deleted" x="395" y="0"/>
+</item>
+<item historyLabel="Rcc.h" index="6">
+<position info="not_deleted" x="455" y="0"/>
+</item>
+<item historyLabel="Rcc.c" index="5">
+<position info="not_deleted" x="395" y="0"/>
+</item>
+<item historyLabel="Rcc.h" index="6">
+<position info="not_deleted" x="455" y="0"/>
+</item>
+<item active="true" historyLabel="Dac.c" index="7">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -171,6 +199,12 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Rcc.h" tooltip="Test/app/Rcc.h">
+<persistable path="/Test/app/Rcc.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Rcc.c" tooltip="Test/app/Rcc.c">
+<persistable path="/Test/app/Rcc.c"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="Test/app/main.c">
 <persistable path="/Test/app/main.c"/>
 </file>
@@ -188,12 +222,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f4xx.c" tooltip="Test/Config/system_stm32f4xx.c">
 <persistable path="/Test/Config/system_stm32f4xx.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Rcc.h" tooltip="Test/app/Rcc.h">
-<persistable path="/Test/app/Rcc.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Rcc.c" tooltip="Test/app/Rcc.c">
-<persistable path="/Test/app/Rcc.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Gpio.h" tooltip="Test/app/Gpio.h">
 <persistable path="/Test/app/Gpio.h"/>

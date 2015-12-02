@@ -73,7 +73,7 @@ struct GPIO_t
 
 
 void configureOutput(int speed, int pinNum, GPIO *port);
-void configureInput(int pullMode, int pinNum, GPIO *port);
+// void configureInput(int pullMode, int pinNum, GPIO *port);
 void configureAnalog(int pinNum, GPIO *port);
 void writeOne(uint16_t pinNum, GPIO *port);
 void writeZero(uint16_t pinNum, GPIO *port);
