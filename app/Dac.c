@@ -43,9 +43,10 @@ void enableDAC2(int enable)
 void setDAC1buffer(int enable)
 {
   if(enable)
-    Dac_reg->DAC_CR |= (1 << 1);
+	  Dac_reg->DAC_CR &= ~(1 << 1);
   else
-    Dac_reg->DAC_CR &= ~(1 << 1); 
+	  Dac_reg->DAC_CR |= (1 << 1);
+
 }
 
 /**
@@ -59,7 +60,7 @@ void setDAC1buffer(int enable)
 void setDAC2buffer(int enable)
 {
   if(enable)
-    Dac_reg->DAC_CR |= (1 << 17);
+	  Dac_reg->DAC_CR &= ~(1 << 17);
   else
-    Dac_reg->DAC_CR &= ~(1 << 17); 
+	  Dac_reg->DAC_CR |= (1 << 17);
 }

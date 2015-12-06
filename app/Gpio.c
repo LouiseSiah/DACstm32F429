@@ -1,4 +1,5 @@
 #include "Gpio.h"
+#include "Rcc.h"
 #include "stm32f4xx_hal_rcc.h"
 
 /**
