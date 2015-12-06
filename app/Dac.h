@@ -25,10 +25,29 @@ struct DAC_t{
 #define YES 1
 #define NO  0
 
+#define WAVE_GENERATION_DISABLE 0
+#define NOISE_WAVE              1
+#define TRIANGLE_WAVE           2
+
+enum TriggerSource
+{
+	TIMER6,
+	TIMER8,
+	TIMER7,
+	TIMER5,
+	TIMER2,
+	TIMER4,
+	EXTERNAL_TRIGGER,
+	SW_TRIGGER
+};
 
 void enableDAC1(int enable);
 void enableDAC2(int enable);
 void setDAC1buffer(int enable);
 void setDAC2buffer(int enable);
+void enableDAC1TriggerAndSelect(int enable, int triggerSource);
+void enableDAC2TriggerAndSelect(int enable, int triggerSource);
+void selectDAC1WaveType(int waveType);
+void selectDAC2WaveType(int waveType);
 
 #endif // __Dac_H__

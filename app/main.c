@@ -16,6 +16,8 @@ void DAC_setup()
   enableDAC2(YES);
   setDAC1buffer(YES);
   setDAC2buffer(YES);
+  enableDAC1TriggerAndSelect(NO, SW_TRIGGER);
+  enableDAC2TriggerAndSelect(NO, SW_TRIGGER);
 }
 
 void GPIO_setup()
