@@ -81,5 +81,7 @@ void enableDAC1TriggerAndSelect(int enable, int triggerSource);
 void enableDAC2TriggerAndSelect(int enable, int triggerSource);
 void selectDAC1WaveType(int waveType, int amplitudeOrMask);
 void selectDAC2WaveType(int waveType, int amplitudeOrMask);
+void sendSWTriggerToDac1();
+void sendSWTriggerToDac2();
 
 #endif // __Dac_H__

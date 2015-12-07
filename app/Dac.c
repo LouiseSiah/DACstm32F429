@@ -123,6 +123,7 @@ void enableDAC2TriggerAndSelect(int enable, int triggerSource)
  */
 void selectDAC1WaveType(int waveType, int amplitudeOrMask)
 {
+//  int temp = 0xFFFF;
   if(!waveType) // WAVE_GENERATION_DISABLE
   {
     Dac_reg->DAC_CR &= ~ (3 << 6);
@@ -140,7 +141,9 @@ void selectDAC1WaveType(int waveType, int amplitudeOrMask)
     Dac_reg->DAC_CR &= ~ (3 << 6);
     Dac_reg->DAC_CR |= (waveType << 6);
     Dac_reg->DAC_CR &= ~ (0xF << 8);
+//    temp &= ~ (0xF << 8);
     Dac_reg->DAC_CR |= (amplitudeOrMask << 8);
+//    temp |=  (amplitudeOrMask << 8);
   }
 }
 
@@ -177,4 +180,31 @@ void selectDAC2WaveType(int waveType, int amplitudeOrMask)
     Dac_reg->DAC_CR &= ~ (0xF << 24);
     Dac_reg->DAC_CR |= (amplitudeOrMask << 24);
   }
+}
+
+
+/**
+ * brief  @ This function is used to trigger DAC1.
+ *
+ * param  @ none
+ *
+ * retval @ none
+ *
+ */
+void sendSWTriggerToDac1()
+{
+  Dac_reg->DAC_SWTRIGR |= 1;
+}
+
+/**
+ * brief  @ This function is used to trigger DAC2.
+ *
+ * param  @ none
+ *
+ * retval @ none
+ *
+ */
+void sendSWTriggerToDac2()
+{
+  Dac_reg->DAC_SWTRIGR |= 2;
 }
