@@ -41,13 +41,45 @@ enum TriggerSource
 	SW_TRIGGER
 };
 
+enum TriangleAmplitude
+{
+  AMPLITUDE_1,
+  AMPLITUDE_3,
+  AMPLITUDE_7,
+  AMPLITUDE_15,
+  AMPLITUDE_31,
+  AMPLITUDE_63,
+  AMPLITUDE_127,
+  AMPLITUDE_255,
+  AMPLITUDE_511,
+  AMPLITUDE_1023,
+  AMPLITUDE_2047,
+  AMPLITUDE_4095
+};
+
+enum UnmaskBits
+{
+  BITS_0,
+  BITS_0TO1,
+  BITS_0TO2,
+  BITS_0TO3,
+  BITS_0TO4,
+  BITS_0TO5,
+  BITS_0TO6,
+  BITS_0TO7,
+  BITS_0TO8,
+  BITS_0TO9,
+  BITS_0TO10,
+  BITS_0TO11
+};
+
 void enableDAC1(int enable);
 void enableDAC2(int enable);
 void setDAC1buffer(int enable);
 void setDAC2buffer(int enable);
 void enableDAC1TriggerAndSelect(int enable, int triggerSource);
 void enableDAC2TriggerAndSelect(int enable, int triggerSource);
-void selectDAC1WaveType(int waveType);
-void selectDAC2WaveType(int waveType);
+void selectDAC1WaveType(int waveType, int amplitudeOrMask);
+void selectDAC2WaveType(int waveType, int amplitudeOrMask);
 
 #endif // __Dac_H__

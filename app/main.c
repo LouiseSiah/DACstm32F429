@@ -14,10 +14,12 @@ void DAC_setup()
   dacUnresetEnableClock();
   enableDAC1(YES);
   enableDAC2(YES);
-  setDAC1buffer(YES);
-  setDAC2buffer(YES);
-  enableDAC1TriggerAndSelect(NO, SW_TRIGGER);
-  enableDAC2TriggerAndSelect(NO, SW_TRIGGER);
+  setDAC1buffer(NO);
+  setDAC2buffer(NO);
+  enableDAC1TriggerAndSelect(NO, NO);
+  enableDAC2TriggerAndSelect(NO, NO);
+  selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
+  selectDAC2WaveType(WAVE_GENERATION_DISABLE, NO);
 }
 
 void GPIO_setup()

@@ -15,24 +15,24 @@
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
 <part id="4"/>
 <part id="5"/>
 <part id="6"/>
+<part id="0"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="Dac.h" partName="Dac.h" path="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Dac.h" title="Dac.h" tooltip="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Dac.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test/app/Dac.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="158" selectionOffset="898" selectionTopPixel="623"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1270" selectionTopPixel="1493"/>
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/D203C-01/CoIDE/workspace/DAC/app/main.c" title="main.c" tooltip="C:/Users/D203C-01/CoIDE/workspace/DAC/app/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test/app/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="361" selectionTopPixel="1013"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="362" selectionTopPixel="203"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="Rcc.c" partName="Rcc.c" path="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Rcc.c" title="Rcc.c" tooltip="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Rcc.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test/app/Rcc.c"/>
@@ -52,7 +52,7 @@
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="Dac.c" partName="Dac.c" path="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Dac.c" title="Dac.c" tooltip="C:/Users/D203C-01/CoIDE/workspace/DAC/app/Dac.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Test/app/Dac.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="2453"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1727" selectionTopPixel="989"/>
 </editor>
 </editors>
 <views>
@@ -64,7 +64,7 @@
 <element path="/Test/Config"/>
 </expanded>
 <selection>
-<element path="/Test/app/Dac.c"/>
+<element path="/Test/app/main.c"/>
 </selection>
 </viewState>
 </view>
@@ -201,8 +201,8 @@
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
 <hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
 <hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
-<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
 <hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
+<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.debug.ui.DebugView"/>
 <view id="org.coocox.codebugger.trace.ui.traceview"/>
@@ -270,43 +270,11 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/main.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/Dac.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/Dac.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/Dac.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/Dac.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Test/app/Dac.h"/>
 </editors>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="991" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1045" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1073" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="991" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1045" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1073" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="991" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1045" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1073" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="991" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1045" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="1073" y="0"/>
-</item>
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="991" y="0"/>
 </item>
@@ -418,8 +386,44 @@
 <item historyLabel="Dac.c" index="1">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item active="true" historyLabel="main.c" index="0">
+<item historyLabel="main.c" index="0">
 <position info="not_deleted" x="461" y="0"/>
+</item>
+<item historyLabel="Dac.c" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Dac.h" index="4">
+<position info="not_deleted" x="1112" y="0"/>
+</item>
+<item historyLabel="Dac.c" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position info="not_deleted" x="1167" y="0"/>
+</item>
+<item historyLabel="Dac.h" index="6">
+<position info="not_deleted" x="1111" y="0"/>
+</item>
+<item historyLabel="Dac.h" index="6">
+<position info="not_deleted" x="900" y="16"/>
+</item>
+<item historyLabel="Dac.h" index="6">
+<position info="not_deleted" x="1111" y="0"/>
+</item>
+<item historyLabel="Dac.h" index="6">
+<position info="not_deleted" x="1270" y="0"/>
+</item>
+<item historyLabel="main.c" index="5">
+<position info="not_deleted" x="1249" y="0"/>
+</item>
+<item historyLabel="Dac.h" index="6">
+<position info="not_deleted" x="1270" y="0"/>
+</item>
+<item historyLabel="Dac.c" index="3">
+<position info="not_deleted" x="1727" y="0"/>
+</item>
+<item active="true" historyLabel="main.c" index="5">
+<position info="not_deleted" x="1249" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -466,6 +470,9 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="Dac.h" tooltip="Test/app/Dac.h">
 <persistable path="/Test/app/Dac.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_hal_def.h" tooltip="RNG/Hardware/stm32f4xx_hal_def.h">
+<persistable path="/RNG/Hardware/stm32f4xx_hal_def.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx_hal_def.h" tooltip="RNG/Hardware/stm32f4xx_hal_def.h">
 <persistable path="/RNG/Hardware/stm32f4xx_hal_def.h"/>
