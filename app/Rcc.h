@@ -3,13 +3,12 @@
 
 #include <stdint.h>
 #include "Gpio.h"
-#include "Dac.h"
+//#include "Dac.h"
 // #include "Gpio.h"
 
-
-
 typedef struct RCC_t RCCtype;
-struct RCC_t{
+struct RCC_t
+{
 	volatile uint32_t RCC_CR;
 	volatile uint32_t RCC_PLLCFGR;
 	volatile uint32_t RCC_CFGR;
@@ -60,8 +59,7 @@ struct RCC_t{
 
 void gpioUnresetEnableClock(GPIO *port);
 void dacUnresetEnableClock();
-
-// void dacInitAPB1Clock();
+void timer6UnresetEnableClock();
 
 uint32_t getSystemClock();
 uint32_t getAPB1Clock(uint32_t sysClock);

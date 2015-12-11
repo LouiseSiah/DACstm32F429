@@ -50,7 +50,7 @@ struct GPIO_t
 #define GPIO_HIGH_SPEED		2
 #define GPIO_V_HIGH_SPEED	3
 
-#define	NO_PULL			  00
+#define	NO_PULL		    00
 #define	PULL_UP		  	01
 #define	PULL_DOWN	  	10
 #define	RESERVED_PULL	11

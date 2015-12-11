@@ -14,6 +14,12 @@ void dacUnresetEnableClock()
   RCC_reg->RCC_APB1ENR |= (1 << 29);
 }
 
+void timer6UnresetEnableClock()
+{
+  RCC_reg->RCC_APB1RSTR &= ~ (1 << 4);
+	RCC_reg->RCC_APB1ENR |= (1 << 4);
+}
+
 uint32_t getSystemClock(){
 	int divM, xN, divP, divAHB;
 	int sysClock;

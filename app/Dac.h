@@ -4,7 +4,8 @@
 #include <stdint.h>
 
 typedef struct DAC_t DACtype;
-struct DAC_t{
+struct DAC_t
+{
   volatile uint32_t DAC_CR;
   volatile uint32_t DAC_SWTRIGR;
   volatile uint32_t DAC_DHR12R1;

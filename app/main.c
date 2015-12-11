@@ -4,6 +4,7 @@
 #include "Gpio.h"
 #include "Rcc.h"
 #include "Dac.h"
+#include "Timer.h"
 #include <math.h>
 #include <stdint.h>
 
@@ -16,10 +17,11 @@ void DAC_setup()
   enableDAC2(NO);
   setDAC1buffer(YES);
   setDAC2buffer(NO);
-  enableDAC1TriggerAndSelect(YES, SW_TRIGGER);
+  enableDAC1TriggerAndSelect(YES, TIMER6);
+//  enableDAC1TriggerAndSelect(NO, NO);
   enableDAC2TriggerAndSelect(NO, NO);
-  selectDAC1WaveType(TRIANGLE_WAVE, AMPLITUDE_4095);
-//  selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
+//  selectDAC1WaveType(TRIANGLE_WAVE, AMPLITUDE_4095);
+  selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
   selectDAC2WaveType(WAVE_GENERATION_DISABLE, NO);
 }
 
@@ -31,16 +33,49 @@ void GPIO_setup()
   configureOutput(GPIO_V_HIGH_SPEED, 5, PORTA);
 }
 
+void TIMER6_setup()
+{
+  timer6UnresetEnableClock();
+  getTim6AutoReloadValue(0xFFF);
+  getTim6PrescaleValue(0xFFFF);
+  //disableTim6UpdateEvent();
+  selectionOfOutputTrigger(UPDATE_UEV);
+}
+
 void delay(uint32_t delayCount)
 {
 	while(delayCount != 0)
 		delayCount--;
 }
 
+/* =====test code for TIMER=====
+int main(void)
+{
+  int sample = 0;
+  TIMER6_setup();
+
+  enableTim6Counter();
+  while(1)
+  {
+     if(TIM6_reg->SR & 1)
+     {
+       sample = TIM6_reg->CNT;
+       TIM6_reg->SR &= ~ (1); //clear overflow
+     }
+     else
+       sample = 0xAA;
+  }
+}
+*/
+
+/*
+ * code for DAC
+ */
 int main(void)
 {
   GPIO_setup();
   DAC_setup();
+  TIMER6_setup();
   int temp1;
   int temp2;
   unsigned int degree = 0;
@@ -55,13 +90,13 @@ int main(void)
 //			temp1 = (2047 * cos(radian_per_degree * degree));
 //			temp1 = (2048 - temp1);
 //			Dac_reg->DAC_DHR12R1 = temp1;
-//			temp1 += 11;
-			Dac_reg->DAC_DHR12R1 = 0;
+			temp1 += 11;
+			Dac_reg->DAC_DHR12R1 = temp1;
 //			temp2 = (2047 * sin(radian_per_degree * degree));
 //			temp2 = (2048 - temp2);
 //			Dac_reg->DAC_DHR12R2 = temp2;
-			delay(10);
-			sendSWTriggerToDac1();
+//			delay(10);
+//			sendSWTriggerToDac1();
 		}
 
 	}
