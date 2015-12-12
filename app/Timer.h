@@ -36,5 +36,7 @@ void enableTim6UpdateEvent();
 void disableTim6UpdateEvent();
 void enableUpdateRequestSource(int enable);
 void selectionOfOutputTrigger(int outputTriggerSource);
+void resetCounterBySetUG();
+void onePulseMode();
 
 #endif // __Timer_H__

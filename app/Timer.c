@@ -98,3 +98,27 @@ void selectionOfOutputTrigger(int outputTriggerSource)
   TIM6_reg->CR2 &= ~ (7 << 4);
   TIM6_reg->CR2 |= (outputTriggerSource << 4);
 }
+
+
+/**
+ * brief  @ To re-initializes the timer counter and generates an update of the registers.
+ * 		  @ Only use in CR1->UDIS bit set(disble the UEV).
+ * param  @ none
+ * retval @ none
+ *
+ */
+void resetCounterBySetUG()
+{
+  TIM6_reg->EGR |= 1;
+}
+
+/**
+ * brief  @ Counter stops counting at the next update event (clearing the CEN bit).
+ * param  @ none
+ * retval @ none
+ *
+ */
+void onePulseMode()
+{
+  TIM6_reg->CR1 |= (1 << 3);
+}
