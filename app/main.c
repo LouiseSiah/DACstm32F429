@@ -13,16 +13,17 @@
 void DAC_setup()
 {
   dacUnresetEnableClock();
-//  selectDAC1WaveType(TRIANGLE_WAVE, AMPLITUDE_255);
-  selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
+//  selectDAC1WaveType(NOISE_WAVE, BITS_0TO1);
+  selectDAC1WaveType(TRIANGLE_WAVE, AMPLITUDE_255);
+//  selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
   selectDAC2WaveType(WAVE_GENERATION_DISABLE, NO);
   enableDAC1(YES);
   enableDAC2(NO);
   setDAC1buffer(YES);
   setDAC2buffer(NO);
-    enableDAC1TriggerAndSelect(YES, TIMER6);
+  enableDAC1TriggerAndSelect(YES, TIMER6);
 //    enableDAC1TriggerAndSelect(YES, SW_TRIGGER);
-  //  enableDAC1TriggerAndSelect(NO, NO);
+//  enableDAC1TriggerAndSelect(NO, NO);
     enableDAC2TriggerAndSelect(NO, NO);
 }
 
@@ -37,7 +38,7 @@ void GPIO_setup()
 void TIMER6_setup()
 {
   timer6UnresetEnableClock();
-  getTim6AutoReloadValue(1);
+  getTim6AutoReloadValue(0x1);
   getTim6PrescaleValue(0);
 //  onePulseMode();
 //  disableTim6UpdateEvent();
@@ -91,30 +92,45 @@ int main(void)
   unsigned int degree = 0;
 //  sysClock = getSystemClock();
 //  APBclock = getAPB1Clock(sysClock);
-  enableTim6Counter();
+//  enableTim6Counter();
 
 	while(1)
 	{
+		/*
+		enableTim6Counter();
+		temp1 = 2000;
+		Dac_reg->DAC_DHR12R1 = temp1;
 
-		temp1 = 0;
-//		temp2 = 0;
+		while(1)
+		{
+//			delay(100);
+//			sendSWTriggerToDac1();
+		}
+		*/
+		enableTim6Counter();
 
+		for(temp1 = 0; temp1 < 3600; temp1 += 10)
+		{
+			Dac_reg->DAC_DHR12R1 = temp1;
+//			sendSWTriggerToDac1();
+			delay(100);
+
+		}
+
+/*
 		for(degree = 0; degree < 360; degree++)
 		{
-//			sample = TIM6_reg->CNT;
 //			temp1 = (2047 * cos(radian_per_degree * degree));
 //			temp1 = (2048 - temp1);
 //			Dac_reg->DAC_DHR12R1 = temp1;
 			temp1 += 10;
 			Dac_reg->DAC_DHR12R1 = temp1;
-//			temp2 = (2047 * sin(radian_per_degree * degree));
-//			temp2 = (2048 - temp2);
-//			Dac_reg->DAC_DHR12R2 = temp2;
 //			delay(1);
 //			sendSWTriggerToDac1();
+			enableTim6Counter();
 			while(1)
 			{
-//
+//			  sendSWTriggerToDac1();
 		      if(TIM6_reg->SR & 1)
 		      {
 		    	TIM6_reg->SR &= ~ (1);
@@ -128,5 +144,6 @@ int main(void)
 
 		}
 
+*/
 	}
 }
