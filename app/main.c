@@ -13,8 +13,8 @@
 void DAC_setup()
 {
   dacUnresetEnableClock();
-//  selectDAC1WaveType(NOISE_WAVE, BITS_0TO1);
-  selectDAC1WaveType(TRIANGLE_WAVE, AMPLITUDE_255);
+  selectDAC1WaveType(NOISE_WAVE, BITS_0);
+//  selectDAC1WaveType(TRIANGLE_WAVE, AMPLITUDE_2047);
 //  selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
   selectDAC2WaveType(WAVE_GENERATION_DISABLE, NO);
   enableDAC1(YES);
@@ -22,7 +22,7 @@ void DAC_setup()
   setDAC1buffer(YES);
   setDAC2buffer(NO);
   enableDAC1TriggerAndSelect(YES, TIMER6);
-//    enableDAC1TriggerAndSelect(YES, SW_TRIGGER);
+//   enableDAC1TriggerAndSelect(YES, SW_TRIGGER);
 //  enableDAC1TriggerAndSelect(NO, NO);
     enableDAC2TriggerAndSelect(NO, NO);
 }
@@ -96,9 +96,8 @@ int main(void)
 
 	while(1)
 	{
-		/*
 		enableTim6Counter();
-		temp1 = 2000;
+		temp1 = 1000;
 		Dac_reg->DAC_DHR12R1 = temp1;
 
 		while(1)
@@ -106,16 +105,16 @@ int main(void)
 //			delay(100);
 //			sendSWTriggerToDac1();
 		}
-		*/
-		enableTim6Counter();
 
-		for(temp1 = 0; temp1 < 3600; temp1 += 10)
+		/*enableTim6Counter();
+
+		for(temp1 = 0; temp1 < 4000; temp1 += 10)
 		{
 			Dac_reg->DAC_DHR12R1 = temp1;
 //			sendSWTriggerToDac1();
 			delay(100);
 
-		}
+		}*/
 
 /*
 		for(degree = 0; degree < 360; degree++)
