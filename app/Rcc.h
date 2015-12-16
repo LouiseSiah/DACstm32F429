@@ -60,6 +60,7 @@ struct RCC_t
 void gpioUnresetEnableClock(GPIO *port);
 void dacUnresetEnableClock();
 void timer6UnresetEnableClock();
+void dma1UnresetEnableClock();
 
 uint32_t getSystemClock();
 uint32_t getAPB1Clock(uint32_t sysClock);

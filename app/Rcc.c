@@ -60,6 +60,13 @@ uint32_t getAPB1Clock(uint32_t sysClock){
 
 	return aPB1Clock;
 }
+
+void dma1UnresetEnableClock()
+{
+	RCC_reg->RCC_AHB1RSTR &= ~ (1  << 21);
+  RCC_reg->RCC_AHB1ENR |= (1 << 21);
+}
+
 // void rngUnresetEnableClock(){
 	// RCC_reg->RCC_AHB2RSTR &= ~(1 << 6);
 	// RCC_reg->RCC_AHB2ENR  |= (1 << 6);
