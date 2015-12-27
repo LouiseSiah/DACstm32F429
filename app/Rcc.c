@@ -16,7 +16,7 @@ void dacUnresetEnableClock()
 
 void timer6UnresetEnableClock()
 {
-  RCC_reg->RCC_APB1RSTR &= ~ (1 << 4);
+	RCC_reg->RCC_APB1RSTR &= ~ (1 << 4);
 	RCC_reg->RCC_APB1ENR |= (1 << 4);
 }
 
@@ -63,8 +63,12 @@ uint32_t getAPB1Clock(uint32_t sysClock){
 
 void dma1UnresetEnableClock()
 {
+	int read;
 	RCC_reg->RCC_AHB1RSTR &= ~ (1  << 21);
-  RCC_reg->RCC_AHB1ENR |= (1 << 21);
+	read = RCC_reg->RCC_AHB1RSTR ;
+	RCC_reg->RCC_AHB1ENR |= (1 << 21);
+	read = RCC_reg-> RCC_AHB1ENR;
+
 }
 
 // void rngUnresetEnableClock(){

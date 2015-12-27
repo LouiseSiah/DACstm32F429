@@ -2,99 +2,159 @@
 
 void configureDMA1ForDAC1()
 {
+	int readDma = 0;
   //CHANNEL SELECTION
  	Dma1_reg->S5.CR &= ~ (7 << 25);
-	Dma1_reg->S5.CR |= 7 << 25;
-
+ 	readDma = Dma1_reg->S5.CR;
+ 	Dma1_reg->S5.CR |= 7 << 25;
+ 	readDma = Dma1_reg->S5.CR;
   //memory burst transfer
-  Dma1_reg->S5.CR &= ~ (3 << 23);
-	Dma1_reg->S5.CR |= ~ (3 << 23);
+	Dma1_reg->S5.CR &= ~ (3 << 23);
+	readDma = Dma1_reg->S5.CR;
+	Dma1_reg->S5.CR |= 0 << 23;
+	readDma = Dma1_reg->S5.CR;
 
   //peripheral burst transfer
-  Dma1_reg->S5.CR &= ~ (3 << 21);
-	Dma1_reg->S5.CR |= ~ (3 << 21);
-  
-  //Current target (only in double buffer mode)
-	Dma1_reg->S5.CR &= ~ (1 << 19);
-	Dma1_reg->S5.CR |= (1 << 19);
+	Dma1_reg->S5.CR &= ~ (3 << 21);
+	readDma = Dma1_reg->S5.CR;
+	Dma1_reg->S5.CR |= 0 << 21;
+	readDma = Dma1_reg->S5.CR;
 
-  //Current target (only in double buffer mode)
-	Dma1_reg->S5.CR &= ~ (1 << 18);
-	Dma1_reg->S5.CR |= (1 << 18);
-  
-  //Memory data size
-  Dma1_reg->S5.CR &= ~ (3 << 13);
-	Dma1_reg->S5.CR |= ~ (3 << 13);
-  
-  //Peripheral data size
-  Dma1_reg->S5.CR &= ~ (3 << 11);
-	Dma1_reg->S5.CR |= ~ (3 << 11);
-  
-  //Memory increment mode
-	Dma1_reg->S5.CR |= (1 << 10);
 
-  //Memory increment mode
-	Dma1_reg->S5.CR |= (0 << 9);
-  
-  //Data transfer direction
-  Dma1_reg->S5.CR &= ~ (3 << 6);
-	Dma1_reg->S5.CR |= Memory_to_peripheral << 6;
-  
   //Peripheral flow controller
-  Dma1_reg->S5.CR &= ~ (1 << 5);
-  Dma1_reg->S5.CR |= ~ (1 << 5);
-  
+	Dma1_reg->S5.CR &= ~ (1 << 5);
+	readDma = Dma1_reg->S5.CR;
+	Dma1_reg->S5.CR |= 0 << 5;
+	readDma = Dma1_reg->S5.CR;
+
+
   //Transfer complete interrupt enable
-  Dma1_reg->S5.CR |= (1 << 4);
+	Dma1_reg->S5.CR &= ~(1 << 4);
+	readDma = Dma1_reg->S5.CR;
   //Half transfer interrupt enable
-  Dma1_reg->S5.CR |= (1 << 3);
+	Dma1_reg->S5.CR &= ~(1 << 3);
+	readDma = Dma1_reg->S5.CR;
   //Transfer error interrupt enable
-  Dma1_reg->S5.CR |= (1 << 2);
+  	Dma1_reg->S5.CR &= ~(1 << 2);
+  	readDma = Dma1_reg->S5.CR;
   //Direct mode error interrupt enable
-  Dma1_reg->S5.CR |= (1 << 1);
-  
+  	Dma1_reg->S5.CR &= ~(1 << 1);
+  	readDma = Dma1_reg->S5.CR;
 
 
-	ptr->NDTR = (uint32_t)dataSize;
-	if(transDireation == PERIPHERAL_TO_MEMORY){
-		ptr->PAR = (uint32_t)source;
-		ptr->M0AR = (uint32_t)destination;
-	}
-  else if(transDireation == MEMORY_TO_PERIPHERAL){
-		ptr->PAR = (uint32_t)destination;
-		ptr->M0AR = (uint32_t)source;
-	}else if( transDireation == MEMORT_TO_MEMORY){
-		ptr->PAR = (uint32_t)source;
-		ptr->M0AR = (uint32_t)destination;
-	}
-	// checkNDTR = ptr->NDTR;
-	// checkCR = ptr->CR;
-    // checkPAR = ptr->PAR;
-	// checkM0AR = ptr->M0AR;
 }
-
-
 
 void enableDma()
 {
-  Dma1_reg->S5.CR |= 1;
+	uint32_t read;
+	Dma1_reg->S5.CR |= 1;
+	read = Dma1_reg->S5.CR;
 }
 
-void DMA_memcpy8(uint32_t peripheralAddress, uint32_t sourceAddress, int numOfData )
+void disableDma()
 {
-    														/* As per page 233 this is how to configure a stream */
-	uint32_t read ;
-	if((Dma1_reg->S5.CR & 1) == 1 )
-  {
-    Dma1_reg->S5.CR  &= ~ 1 ;  					// 1. If stream is enabled, disable it
-    while( ( dma2->S7.CR & ( 1 << EN ) == 1) );
-  }
-	Dma1_reg->S5.M0AR = sourceAddress;					/* source address */
-	Dma1_reg->S5.PAR = peripheralAddress; 					/* destination address */
-  Dma1_reg->S5.NDTR = numOfData ;  							// Number of data items to transfer
-  read = Dma1_reg->S5.CR;
+	Dma1_reg->S5.CR &= ~ 1;
+	Dma1_reg->S5.CR |= 0;
 }
 
+void cleaDmaHighInterruptFlag(int streamToClear)
+{
+	uint32_t read;
+	Dma1_reg->HIFCR = streamToClear;
+	read = Dma1_reg->HIFCR;
+}
+
+void enableMemoryIncrement(int enable)
+{
+	Dma1_reg->S5.CR &= ~ (1 << 10);
+	Dma1_reg->S5.CR |= (enable << 10);
+}
+
+void enablePeripheralIncrement(int enable)
+{
+	Dma1_reg->S5.CR &= ~ (1 << 9);
+	Dma1_reg->S5.CR |= (enable << 9);
+}
+
+void memoryDataSize(int dataSize)
+{
+	Dma1_reg->S5.CR &= ~ (3 << 13);
+	Dma1_reg->S5.CR |= (dataSize << 13);
+}
+
+void peripheralDataSize(int dataSize)
+{
+	Dma1_reg->S5.CR &= ~ (3 << 11);
+	Dma1_reg->S5.CR |= (dataSize << 11);
+}
+
+void numberOfDataTransferDMA(int numOfData)
+{
+	uint32_t read;
+	Dma1_reg->S5.NDTR = numOfData;
+	read = Dma1_reg->S5.NDTR;
+}
+
+void peripheralBaseAddr(uint32_t address)
+{
+	uint32_t read;
+	disableDma();
+	Dma1_reg->S5.PAR = (uint32_t)address; 		/* destination address */
+	read = Dma1_reg->S5.PAR ;
+}
+
+void memory0BaseAddr(uint32_t address)
+{
+	uint32_t read;
+	disableDma();
+	Dma1_reg->S5.M0AR = (uint32_t)address;	/* source address */
+	read = Dma1_reg->S5.M0AR ;
+}
+
+void memory1BaseAddr(uint32_t address)
+{
+	uint32_t read;
+	disableDma();
+	read = Dma1_reg->S5.CR;
+	Dma1_reg->S5.M1AR = (uint32_t)address;
+	read = Dma1_reg->S5.M1AR;
+}
+
+void dataTransferDirection(int direction)
+{
+	uint32_t read;
+	Dma1_reg->S5.CR &= ~ (3 << 6);
+	Dma1_reg->S5.CR |= direction << 6;
+	read = Dma1_reg->S5.CR;
+}
+
+void priority(int level)
+{
+	uint32_t read;
+	Dma1_reg->S5.CR &= ~ (3 << 16);
+	Dma1_reg->S5.CR |= level << 16;
+	read = Dma1_reg->S5.CR;
+}
+
+
+void enableMemoryCircularMode(int enable)
+{
+	Dma1_reg->S5.CR &= ~ (1 << 8);
+	Dma1_reg->S5.CR |= (enable << 8);
+}
+
+void enableDoubleBufferMode(int enable)
+{
+	Dma1_reg->S5.CR &= ~ (1 << 18);
+	Dma1_reg->S5.CR |= (enable << 18);
+
+
+	//  //Current target (only in double buffer mode)
+	//	Dma1_reg->S5.CR &= ~ (1 << 19);
+	//	Dma1_reg->S5.CR |= ~(1 << 19);
+
+}
+/*
 int getDMA2Status( int st,int posBit ){
  uint32_t checkLISR = DMA2->LISR;
  uint32_t checkHISR = DMA2->HISR;
@@ -140,3 +200,4 @@ void clearDMAstatus(DMA* dma,int st){
 	 uint32_t checkLISR = DMA1->LISR;
 	 uint32_t checkHISR = DMA1->HISR;
 }
+*/

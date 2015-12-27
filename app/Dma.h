@@ -30,18 +30,54 @@ struct DMA_Type{
 
 #define Dma1_reg  ((DMAtype *)0x40026000)
 
-#define Peripheral_to_memory  0
-#define Memory_to_peripheral  1
-#define Memory_to_memory      2
+#define EN 1
 
+#define CLEAR_S4	(0x3D)
+#define CLEAR_S5	(0x3D << 6)
+#define CLEAR_S6	(0x3D << 16)
+#define CLEAR_S7	(0x3D << 22)
 
+enum dataSize
+{
+	BYTE,   	//8 BIT
+	HALF_WORD,	//16 BIT
+	WORD		//32 BIT
+};
 
+enum direction
+{
+	PeripheralToMemory,
+	MemoryToPeripheral,
+	MemoryToMemory
+};
 
-void configureDMA();
+enum priorityLevel
+{
+	Low,
+	Medium,
+	High,
+	VeryHigh
+};
+
+void configureDMA1ForDAC1();
 void enableDma();
-void DMA_memcpy8( uint32_t pDstAddr, uint32_t pSrcAddr, unsigned int uSize );
-
+void disableDma();
+void cleaDmaHighInterruptFlag(int streamToClear);
+void enableMemoryIncrement(int enable);
+void enablePeripheralIncrement(int enable);
+void memoryDataSize(int dataSize);
+void peripheralDataSize(int dataSize);
+void numberOfDataTransferDMA(int numOfData);
+void peripheralBaseAddr(uint32_t address);
+void memory0BaseAddr(uint32_t address);
+void memory1BaseAddr(uint32_t address);
+void dataTransferDirection(int direction);
+void priority(int level);
+void enableMemoryCircularMode(int enable);
+void enableDoubleBufferMode(int enable);
+/*
 void clearDMAFlag(DMA* dma,int st,int posBit);
 void clearDMAstatus(DMA* dma,int st);
 int getDMA1Status( int st,int posBit );
+*/
 #endif // __Dma_H__

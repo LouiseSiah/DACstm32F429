@@ -4,6 +4,7 @@
 #include "Gpio.h"
 #include "Rcc.h"
 #include "Dac.h"
+#include "Dma.h"
 #include "Timer.h"
 #include <math.h>
 #include <stdint.h>
@@ -12,19 +13,21 @@
 
 void DAC_setup()
 {
-  dacUnresetEnableClock();
-  selectDAC1WaveType(NOISE_WAVE, BITS_0);
+	dacUnresetEnableClock();
+	selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
 //  selectDAC1WaveType(TRIANGLE_WAVE, AMPLITUDE_2047);
 //  selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
-  selectDAC2WaveType(WAVE_GENERATION_DISABLE, NO);
-  enableDAC1(YES);
-  enableDAC2(NO);
-  setDAC1buffer(YES);
-  setDAC2buffer(NO);
-  enableDAC1TriggerAndSelect(YES, TIMER6);
+	selectDAC2WaveType(WAVE_GENERATION_DISABLE, NO);
+	setDAC1buffer(YES);
+	setDAC2buffer(NO);
+	enableDAC1TriggerAndSelect(YES, TIMER6);
 //   enableDAC1TriggerAndSelect(YES, SW_TRIGGER);
-//  enableDAC1TriggerAndSelect(NO, NO);
-    enableDAC2TriggerAndSelect(NO, NO);
+//	enableDAC1TriggerAndSelect(NO, NO);
+	enableDAC2TriggerAndSelect(NO, NO);
+	enableDAC1DMA(YES);
+//	enableDAC2DMA(NO);
+	enableDAC1(YES);
+	enableDAC2(NO);
 }
 
 void GPIO_setup()
@@ -51,98 +54,130 @@ void delay(uint32_t delayCount)
 	while(delayCount != 0)
 		delayCount--;
 }
-
-//=====test code for TIMER=====
-/*int main(void)
+void dma_setup()
 {
-  int sample = 0;
-  TIMER6_setup();
+	dma1UnresetEnableClock();
+	configureDMA1ForDAC1();
+	cleaDmaHighInterruptFlag(CLEAR_S5);
+	enableMemoryIncrement(YES);
+	enablePeripheralIncrement(NO);
+	memoryDataSize(HALF_WORD);
+	peripheralDataSize(HALF_WORD);
+	dataTransferDirection(MemoryToPeripheral);
+	priority(VeryHigh);
+	enableMemoryCircularMode(YES);
+	enableDoubleBufferMode(NO);
+	disableDma();
+}
 
-  enableTim6Counter();
+void usingTimerTriggerHalfTri()
+{
+	GPIO_setup();
+	DAC_setup();
+	TIMER6_setup();
+	int temp1;
 
-  while(1)
-  {
-	 if(TIM6_reg->SR & 1)
-//	 if(TIM6_reg->CNT == TIM6_reg->ARR)
-     {
-       sample = TIM6_reg->CNT;
-       TIM6_reg->SR &= ~ (1); //clear overflow
-//       resetCounterBySetUG();
-       enableTim6Counter();
-       sample = TIM6_reg->CNT;
-     }
-     else
-       sample = TIM6_reg->CNT;
-  }
-}*/
+	enableTim6Counter();
 
+	for(temp1 = 0; temp1 < 4000; temp1 += 10)
+	{
+		Dac_reg->DAC_DHR12R1 = temp1;
+		sendSWTriggerToDac1();
+		delay(100);
+
+	}
+
+	//USING TIMER TRIGGER
+	/*enableTim6Counter();
+	temp2 = 1000;
+	Dac_reg->DAC_DHR12R1 = temp2;
+
+	while(1)
+	{
+//			delay(100);
+//			sendSWTriggerToDac1();
+	}
+	*/
+
+}
+
+void sinWaveNoTrigger()
+{
+  GPIO_setup();
+  DAC_setup();
+
+  int temp2;
+  unsigned int degree = 0;
+	for(degree = 0; degree < 360; degree++)
+	{
+
+		temp2 = (2047 * cos(radian_per_degree * degree));
+		temp2 = (2048 - temp2);
+		Dac_reg->DAC_DHR12R1 = temp2;
+//		temp2 += 10;
+//		Dac_reg->DAC_DHR12R1 = temp2;
+		delay(1);
+//		sendSWTriggerToDac1();
+
+	}
+}
+
+void usingDMAandTimerTrigger()
+{
+	GPIO_setup();
+	DAC_setup();
+	TIMER6_setup();
+	short int temp1[360];
+	int degree;
+
+ 	/* forDMA */
+ 	 for(degree = 0; degree < 360; degree++)
+ 	 {
+ 		 temp1[degree] = (2047 * cos(radian_per_degree * degree));
+ 		 temp1[degree] = (2048 - temp1[degree]);
+// 		 temp1[degree] += 10;
+ 	 }
+
+ 	 dma_setup();
+ 	 numberOfDataTransferDMA(degree);
+ 	 peripheralBaseAddr((uint32_t)&(Dac_reg->DAC_DHR12R1));
+ 	 memory0BaseAddr((uint32_t)temp1);
+// 	 memory1BaseAddr((uint32_t)temp1);
+ 	 int readDma = 0;
+ 	 readDma = Dma1_reg->S5.CR;
+
+ 	 readDma = 0;
+ 	 readDma = Dac_reg->DAC_CR;
+ 	 enableTim6Counter();
+ 	 enableDma();
+ 	 degree = Dac_reg->DAC_DHR12R1;
+}
 
 /*
  * code for DAC
  */
 int main(void)
 {
-  GPIO_setup();
-  DAC_setup();
-  TIMER6_setup();
-  int temp1;
-  int sample = 0;
-//  int temp2;
+
 //  int APBclock, sysClock;
-  unsigned int degree = 0;
 //  sysClock = getSystemClock();
 //  APBclock = getAPB1Clock(sysClock);
-//  enableTim6Counter();
+	int sample;
+
+	usingDMAandTimerTrigger();
 
 	while(1)
 	{
-		enableTim6Counter();
-		temp1 = 1000;
-		Dac_reg->DAC_DHR12R1 = temp1;
 
-		while(1)
-		{
-//			delay(100);
-//			sendSWTriggerToDac1();
-		}
+		sample = Dac_reg->DAC_DHR12R1;
 
-		/*enableTim6Counter();
+		sample = Dma1_reg->HISR & (0xF << 8);
 
-		for(temp1 = 0; temp1 < 4000; temp1 += 10)
-		{
-			Dac_reg->DAC_DHR12R1 = temp1;
-//			sendSWTriggerToDac1();
-			delay(100);
 
-		}*/
+//		usingTimerTriggerHalfTri();
 
-/*
-		for(degree = 0; degree < 360; degree++)
-		{
-//			temp1 = (2047 * cos(radian_per_degree * degree));
-//			temp1 = (2048 - temp1);
-//			Dac_reg->DAC_DHR12R1 = temp1;
-			temp1 += 10;
-			Dac_reg->DAC_DHR12R1 = temp1;
-//			delay(1);
-//			sendSWTriggerToDac1();
-			enableTim6Counter();
-			while(1)
-			{
-//			  sendSWTriggerToDac1();
-		      if(TIM6_reg->SR & 1)
-		      {
-		    	TIM6_reg->SR &= ~ (1);
-//				enableTim6Counter();
-//		    	sendSWTriggerToDac1();
-				break;
-		      }
-//		      sample = TIM6_reg->CNT;
-//
-			}
+//		sinWaveNoTrigger();
 
-		}
 
-*/
 	}
 }

@@ -208,3 +208,15 @@ void sendSWTriggerToDac2()
 {
   Dac_reg->DAC_SWTRIGR |= 2;
 }
+
+void enableDAC1DMA(int enable)
+{
+	Dac_reg->DAC_CR &= ~ (1 << 12);
+	Dac_reg->DAC_CR |= enable << 12;
+}
+
+void enableDAC2DMA(int enable)
+{
+	Dac_reg->DAC_CR &= ~ (1 << 28);
+	Dac_reg->DAC_CR = enable << 28;
+}
