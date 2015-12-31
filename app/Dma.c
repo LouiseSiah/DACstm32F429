@@ -2,46 +2,43 @@
 
 void configureDMA1ForDAC1()
 {
-	int readDma = 0;
   //CHANNEL SELECTION
  	Dma1_reg->S5.CR &= ~ (7 << 25);
- 	readDma = Dma1_reg->S5.CR;
  	Dma1_reg->S5.CR |= 7 << 25;
- 	readDma = Dma1_reg->S5.CR;
+
   //memory burst transfer
 	Dma1_reg->S5.CR &= ~ (3 << 23);
-	readDma = Dma1_reg->S5.CR;
 	Dma1_reg->S5.CR |= 0 << 23;
-	readDma = Dma1_reg->S5.CR;
+
 
   //peripheral burst transfer
 	Dma1_reg->S5.CR &= ~ (3 << 21);
-	readDma = Dma1_reg->S5.CR;
 	Dma1_reg->S5.CR |= 0 << 21;
-	readDma = Dma1_reg->S5.CR;
-
 
   //Peripheral flow controller
 	Dma1_reg->S5.CR &= ~ (1 << 5);
-	readDma = Dma1_reg->S5.CR;
 	Dma1_reg->S5.CR |= 0 << 5;
-	readDma = Dma1_reg->S5.CR;
-
 
   //Transfer complete interrupt enable
 	Dma1_reg->S5.CR &= ~(1 << 4);
-	readDma = Dma1_reg->S5.CR;
+	Dma1_reg->S5.CR |= 1 << 4;
+
   //Half transfer interrupt enable
 	Dma1_reg->S5.CR &= ~(1 << 3);
-	readDma = Dma1_reg->S5.CR;
+	Dma1_reg->S5.CR |= 1 << 3;
+
   //Transfer error interrupt enable
   	Dma1_reg->S5.CR &= ~(1 << 2);
-  	readDma = Dma1_reg->S5.CR;
+  	Dma1_reg->S5.CR |= 1 << 2;
+
   //Direct mode error interrupt enable
   	Dma1_reg->S5.CR &= ~(1 << 1);
-  	readDma = Dma1_reg->S5.CR;
+  	Dma1_reg->S5.CR |= 1 << 1;
 
-
+ //Diable FIFO error interrupt
+//	Dma1_reg->S5.FCR &= ~(1 << 7);
+	Dma1_reg->S5.FCR &= 0;
+//  Dma1_reg->S5.FCR |= 0 << 7;
 }
 
 void enableDma()

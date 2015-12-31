@@ -218,5 +218,5 @@ void enableDAC1DMA(int enable)
 void enableDAC2DMA(int enable)
 {
 	Dac_reg->DAC_CR &= ~ (1 << 28);
-	Dac_reg->DAC_CR = enable << 28;
+	Dac_reg->DAC_CR |= enable << 28;
 }

@@ -10,24 +10,27 @@
 #include <stdint.h>
 
 #define	radian_per_degree	0.0174532925
-
+int count = 0;
 void DAC_setup()
 {
 	dacUnresetEnableClock();
-	selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
-//  selectDAC1WaveType(TRIANGLE_WAVE, AMPLITUDE_2047);
-//  selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
-	selectDAC2WaveType(WAVE_GENERATION_DISABLE, NO);
+//	selectDAC1WaveType(WAVE_GENERATION_DISABLE, NO);
+//	selectDAC1WaveType(TRIANGLE_WAVE, AMPLITUDE_255);
+	selectDAC1WaveType(NOISE_WAVE,  BITS_0TO8);
+//	selectDAC2WaveType(WAVE_GENERATION_DISABLE, NO);
+//	selectDAC2WaveType(NOISE_WAVE,  BITS_0TO8);
+	selectDAC2WaveType(TRIANGLE_WAVE, AMPLITUDE_511);
 	setDAC1buffer(YES);
-	setDAC2buffer(NO);
+	setDAC2buffer(YES);
 	enableDAC1TriggerAndSelect(YES, TIMER6);
 //   enableDAC1TriggerAndSelect(YES, SW_TRIGGER);
 //	enableDAC1TriggerAndSelect(NO, NO);
-	enableDAC2TriggerAndSelect(NO, NO);
-	enableDAC1DMA(YES);
-//	enableDAC2DMA(NO);
+	enableDAC2TriggerAndSelect(YES, TIMER6);
+//	enableDAC2TriggerAndSelect(NO, NO);
+	enableDAC1DMA(NO);
+	enableDAC2DMA(NO);
 	enableDAC1(YES);
-	enableDAC2(NO);
+	enableDAC2(YES);
 }
 
 void GPIO_setup()
@@ -65,8 +68,8 @@ void dma_setup()
 	peripheralDataSize(HALF_WORD);
 	dataTransferDirection(MemoryToPeripheral);
 	priority(VeryHigh);
-	enableMemoryCircularMode(YES);
-	enableDoubleBufferMode(NO);
+	enableMemoryCircularMode(NO);
+	enableDoubleBufferMode(YES);
 	disableDma();
 }
 
@@ -76,14 +79,20 @@ void usingTimerTriggerHalfTri()
 	DAC_setup();
 	TIMER6_setup();
 	int temp1;
+	int small[360];
+	int temp2;
+	unsigned int degree = 0;
 
 	enableTim6Counter();
 
-	for(temp1 = 0; temp1 < 4000; temp1 += 10)
+	for(degree = 0; degree < 360; degree++)
 	{
+		temp2 = (2047 * cos(radian_per_degree * degree));
+		temp2 = (2048 - temp2);
+		small[degree] = (temp2 / 2);
+		temp1 += 10;
+		Dac_reg->DAC_DHR12R2 = small[degree];
 		Dac_reg->DAC_DHR12R1 = temp1;
-		sendSWTriggerToDac1();
-		delay(100);
 
 	}
 
@@ -101,20 +110,24 @@ void usingTimerTriggerHalfTri()
 
 }
 
-void sinWaveNoTrigger()
+void cosWaveNoTrigger()
 {
   GPIO_setup();
   DAC_setup();
 
-  int temp2;
+  int temp1 = 0;
   unsigned int degree = 0;
 	for(degree = 0; degree < 360; degree++)
 	{
 
-		temp2 = (2047 * cos(radian_per_degree * degree));
-		temp2 = (2048 - temp2);
-		Dac_reg->DAC_DHR12R1 = temp2;
-//		temp2 += 10;
+//		temp1 = (2047 * cos(radian_per_degree * degree));
+//		temp1 = (2048 - temp1);
+
+		temp1 += 10;
+
+		Dac_reg->DAC_DHR12R1 = temp1;
+		Dac_reg->DAC_DHR8R2 = temp1;
+
 //		Dac_reg->DAC_DHR12R1 = temp2;
 		delay(1);
 //		sendSWTriggerToDac1();
@@ -122,36 +135,67 @@ void sinWaveNoTrigger()
 	}
 }
 
+void DMA1_Stream5_IRQHandler(void)
+{
+	int read;
+	read = Dma1_reg->HISR;
+	//Dma1_reg->HIFCR
+/* not working
+	if(count % 2 == 0)
+	{
+		memory0BaseAddr((uint32_t)sinWave);
+		memory1BaseAddr((uint32_t)cosWave);
+	}
+	else
+	{
+	 	memory0BaseAddr((uint32_t)cosWave);
+	 	memory1BaseAddr((uint32_t)triWave);
+	}
+
+	Dma1_reg->HIFCR &= 0x440;
+*/
+}
 void usingDMAandTimerTrigger()
 {
 	GPIO_setup();
 	DAC_setup();
 	TIMER6_setup();
-	short int temp1[360];
+	short int cosWave[360];
+	short int sinWave[360];
+	short int triWave[360];
 	int degree;
 
  	/* forDMA */
- 	 for(degree = 0; degree < 360; degree++)
- 	 {
- 		 temp1[degree] = (2047 * cos(radian_per_degree * degree));
- 		 temp1[degree] = (2048 - temp1[degree]);
-// 		 temp1[degree] += 10;
- 	 }
+ 	for(degree = 0; degree < 360; degree++)
+ 	{
+ 		cosWave[degree] = (2047 * cos(radian_per_degree * degree));
+ 		cosWave[degree] = (2048 - cosWave[degree]);
+ 		sinWave[degree] = (2047 * sin(radian_per_degree * degree));
+ 		sinWave[degree] = (2048 - sinWave[degree]);
 
- 	 dma_setup();
- 	 numberOfDataTransferDMA(degree);
- 	 peripheralBaseAddr((uint32_t)&(Dac_reg->DAC_DHR12R1));
- 	 memory0BaseAddr((uint32_t)temp1);
-// 	 memory1BaseAddr((uint32_t)temp1);
- 	 int readDma = 0;
- 	 readDma = Dma1_reg->S5.CR;
+ 		if(degree < 180)
+ 			triWave[degree] = (degree + 20) * 10 ;
+ 		else
+ 		{
+ 			triWave[degree] = triWave[degree-180];
+ 			triWave[degree] = 2000 - triWave[degree];
+ 		}
 
- 	 readDma = 0;
- 	 readDma = Dac_reg->DAC_CR;
- 	 enableTim6Counter();
- 	 enableDma();
- 	 degree = Dac_reg->DAC_DHR12R1;
-}
+ 	}
+
+ 	dma_setup();
+ 	numberOfDataTransferDMA(degree);
+ 	peripheralBaseAddr((uint32_t)&(Dac_reg->DAC_DHR12R1));
+ 	memory0BaseAddr((uint32_t)cosWave);
+ 	memory1BaseAddr((uint32_t)triWave);
+// 	int readDma = 0;
+// 	readDma = Dma1_reg->S5.CR;
+
+// 	readDma = 0;
+// 	readDma = Dac_reg->DAC_CR;
+ 	enableTim6Counter();
+ 	enableDma();
+ }
 
 /*
  * code for DAC
@@ -162,21 +206,18 @@ int main(void)
 //  int APBclock, sysClock;
 //  sysClock = getSystemClock();
 //  APBclock = getAPB1Clock(sysClock);
-	int sample;
+//	int sample;
 
-	usingDMAandTimerTrigger();
+//	usingDMAandTimerTrigger();
+//	HAL_NVIC_EnableIRQ(DMA1_Stream5_IRQn);
 
 	while(1)
 	{
 
-		sample = Dac_reg->DAC_DHR12R1;
 
-		sample = Dma1_reg->HISR & (0xF << 8);
+		usingTimerTriggerHalfTri();
 
-
-//		usingTimerTriggerHalfTri();
-
-//		sinWaveNoTrigger();
+//		cosWaveNoTrigger();
 
 
 	}
